@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <title>Movie Watch List</title>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <h1 class="heading">Find your movie</h1>
+        <a href="watchlist.html" class="watchlist-link">My Watchlist</a>
+      </div>
+    </header>
+
+    <section>
+        <div class="input-container">
+            <input id="movie-input" type="search" placeholder="Search movie...">
+            <button id="search-btn" >Search</button>
+        </div>
+    </section>
+
+    <section>
+        <div id="search-list">
+            <div id="start-exploring-div">
+                <img src="images/movie-icon.png" alt="">
+                <p>Start Exploring</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="index.js"></script>
+  </body>
+</html>

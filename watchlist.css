@@ -1,0 +1,56 @@
+
+#movie-list {
+    max-width: 550px;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.start-searching-div {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+}
+
+.start-searching-div > h2 {
+    color: #787878;
+}
+
+.start-searching-div > a {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.start-searching-div > a:hover,
+.start-searching-div > a:focus {
+    text-decoration: underline;
+}
+
+.remove-btn-div {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.remove-btn-div:hover,
+.remove-btn-div:focus {
+    text-decoration: underline;
+}
+
+.remove-btn-div img {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.hidden {
+    display: none;
+}
