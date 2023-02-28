@@ -45,7 +45,7 @@ function addMovieToWatchlist(e) {
 
 async function fetchMovieData() {
   const res = await fetch(
-    `http://www.omdbapi.com/?apikey=36660f2f&s=${movieInput.value}`
+    `https://www.omdbapi.com/?apikey=36660f2f&s=${movieInput.value}`
   );
   const searchData = await res.json();
   setTimeout(() => {
@@ -59,7 +59,7 @@ function generateMovieHtml(response, searchArr) {
 
   if (response === "True") {
     searchArr.forEach((item) => {
-      fetch(`http://www.omdbapi.com/?apikey=36660f2f&i=${item.imdbID}`)
+      fetch(`https://www.omdbapi.com/?apikey=36660f2f&i=${item.imdbID}`)
         .then((res) => res.json())
         .then((updatedData) => {
           data.push(updatedData);
