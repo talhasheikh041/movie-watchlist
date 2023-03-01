@@ -8,12 +8,12 @@ const watchListArray = JSON.parse(localStorage.getItem("watchlist")) || [];
 
 movieInput.addEventListener("keydown", function (e) {
   if (e.type === "click" || (e.type === "keydown" && e.keyCode === 13)) {
-    fetchMovieData();
+    fetchMoviesData();
   }
 });
 searchBtn.addEventListener("click", function (e) {
   if (e.type === "click" || (e.type === "keydown" && e.keyCode === 13)) {
-    fetchMovieData();
+    fetchMoviesData();
   }
 });
 
@@ -40,31 +40,34 @@ function addMovieToWatchlist(e) {
   }
 }
 
-async function fetchMovieData() {
-  const res = await fetch(
+async function fetchMoviesData() {
+  const searchResponse = await fetch(
     `https://www.omdbapi.com/?apikey=36660f2f&s=${movieInput.value}`
   );
-  const searchData = await res.json();
-  generateMovieHtml(searchData.Response, searchData.Search);
-}
+  const searchData = await searchResponse.json();
 
-function generateMovieHtml(response, searchArr) {
-  searchlistArray.length = 0;
-  startExploringDiv.style.display = "none";
-
-  if (response === "True") {
-    searchArr.forEach((item) => {
-      fetch(`https://www.omdbapi.com/?apikey=36660f2f&i=${item.imdbID}`)
-        .then((res) => res.json())
-        .then((updatedData) => {
-          searchlistArray.push(updatedData);
-        });
+  if (searchData.Response === "True") {
+    searchlistArray.length = 0;
+    searchData.Search.forEach(async (item) => {
+      const moviesResponse = await fetch(
+        `https://www.omdbapi.com/?apikey=36660f2f&i=${item.imdbID}`
+      );
+      const movieObj = await moviesResponse.json();
+      searchlistArray.push(movieObj);
     });
     searchList.innerHTML = `<div class="lds-dual-ring"></div>`;
     setTimeout(() => {
-      searchList.innerHTML = searchlistArray
-        .map((movie) => {
-          return `
+      renderMovies();
+    }, 1500);
+  } else {
+    renderErrorMessage();
+  }
+}
+
+function generateMoviesHtml() {
+  return searchlistArray
+    .map((movie) => {
+      return `
             <div class="movie">
             <div class="img-container">
                 <img class="movie-img" src="${movie.Poster}" alt="">
@@ -88,15 +91,21 @@ function generateMovieHtml(response, searchArr) {
             </div>
         </div>
             `;
-        })
-        .join("");
-    }, 1500);
-  } else {
-    return `<h2 style="
-                text-align: center;
-                color: #787878;
-                margin-top: 30px;
-                ">
-                Unable to find what you’re looking for. Please try another search.</h2>`;
-  }
+    })
+    .join("");
+}
+
+function renderMovies() {
+  searchList.innerHTML = generateMoviesHtml();
+}
+
+function renderErrorMessage() {
+  searchList.innerHTML = `
+    <h2 style="
+        text-align: center;
+        color: #787878;
+        margin-top: 30px;
+        ">
+    Unable to find what you’re looking for. Please try another search.</h2>
+  `;
 }
