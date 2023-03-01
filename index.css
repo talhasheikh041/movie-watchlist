@@ -103,7 +103,6 @@ h1, h2, p {
     width: 100px;
     height: 150px;
     object-fit: contain;
-    /* object-fit: cover; */
 }
 
 .title {
@@ -155,14 +154,27 @@ h1, h2, p {
     margin-bottom: auto;
 }
 
-.movie-description {
+.plot {
     margin-top: 10px;
     font-size: 14px;
     line-height: 20px;
-    max-height: 4em;
-    overflow: hidden;
+    max-height: 5em;
+    padding-right: 5px;
+    overflow: scroll;
     color: #A5A5A5;
 }
+
+.plot::-webkit-scrollbar,
+.plot::-webkit-scrollbar-corner {
+    width: 1px;
+    background-color: transparent;
+    
+}
+
+.plot::-webkit-scrollbar-thumb {
+    background-color: #A5A5A5;
+}
+
 
 /* Loader animation */
 

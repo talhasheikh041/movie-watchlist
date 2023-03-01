@@ -87,7 +87,7 @@ function generateMoviesHtml() {
                         <span data-title="${movie.Title}" id="add-movie-btn" >Watchlist</span>
                     </div>
                 </div>
-                <p class="movie-description">${movie.Plot}</p>
+                  <p class="plot">${movie.Plot}</p>
             </div>
         </div>
             `;
