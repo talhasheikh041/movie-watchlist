@@ -51,7 +51,7 @@ function generateWatchlistHtml() {
                     <span data-title="${movie.Title}" id="remove-movie-btn" >Remove</span>
                 </div>
             </div>
-            <p class="movie-description">${movie.Plot}</p>
+            <p class="plot">${movie.Plot}</p>
         </div>
     </div>
         `;

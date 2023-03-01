@@ -242,4 +242,18 @@ h1, h2, p {
         margin-top: 10px;
     }
     
+    .movie-title {  
+        font-size: 14px;
+    }
+
+    .movie-rating,
+    .movie-timing,
+    .movie-genre,
+    .movie-year {
+        font-size: 10px;
+    }
+
+    .plot {
+        font-size: 12px;
+    }
 }
