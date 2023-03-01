@@ -1,8 +1,6 @@
 const movieList = document.querySelector("#movie-list");
 
-let movies = JSON.parse(localStorage.getItem("watchlist"))
-  ? JSON.parse(localStorage.getItem("watchlist"))
-  : [];
+let movies = JSON.parse(localStorage.getItem("watchlist")) || [];
 
 document.addEventListener("click", function (e) {
   if (e.target.id === "remove-movie-btn") {

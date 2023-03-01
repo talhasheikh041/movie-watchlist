@@ -3,11 +3,8 @@ const searchBtn = document.querySelector("#search-btn");
 const searchList = document.querySelector("#search-list");
 const startExploringDiv = document.querySelector("#start-exploring-div");
 
-let tempArr = [];
-
-const watchListArray = JSON.parse(localStorage.getItem("watchlist"))
-  ? JSON.parse(localStorage.getItem("watchlist"))
-  : [];
+const searchlistArray = [];
+const watchListArray = JSON.parse(localStorage.getItem("watchlist")) || [];
 
 movieInput.addEventListener("keydown", function (e) {
   if (e.type === "click" || (e.type === "keydown" && e.keyCode === 13)) {
@@ -32,7 +29,7 @@ function addMovieToWatchlist(e) {
       (movie) => movie.Title === e.target.dataset.title
     ) === -1
   ) {
-    const addMovieObj = tempArr.find(
+    const addMovieObj = searchlistArray.find(
       (movie) => movie.Title === e.target.dataset.title
     );
     watchListArray.push(addMovieObj);
@@ -48,13 +45,11 @@ async function fetchMovieData() {
     `https://www.omdbapi.com/?apikey=36660f2f&s=${movieInput.value}`
   );
   const searchData = await res.json();
-  setTimeout(() => {
-    generateMovieHtml(searchData.Response, searchData.Search);
-  }, 500);
+  generateMovieHtml(searchData.Response, searchData.Search);
 }
 
 function generateMovieHtml(response, searchArr) {
-  const data = [];
+  searchlistArray.length = 0;
   startExploringDiv.style.display = "none";
 
   if (response === "True") {
@@ -62,13 +57,12 @@ function generateMovieHtml(response, searchArr) {
       fetch(`https://www.omdbapi.com/?apikey=36660f2f&i=${item.imdbID}`)
         .then((res) => res.json())
         .then((updatedData) => {
-          data.push(updatedData);
+          searchlistArray.push(updatedData);
         });
     });
     searchList.innerHTML = `<div class="lds-dual-ring"></div>`;
     setTimeout(() => {
-      tempArr = [...data];
-      searchList.innerHTML = data
+      searchList.innerHTML = searchlistArray
         .map((movie) => {
           return `
             <div class="movie">
